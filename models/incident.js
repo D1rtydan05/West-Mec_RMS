@@ -15,3 +15,11 @@ var IncidentSchema = new Schema(
       narrative: {type: String, required: true},
     }
   );
+
+  // Virtual for this author instance URL.
+IncidentSchema.virtual('url').get(function () {
+  return '/data/incident/' + this._id;
+});
+
+// Export model.
+module.exports = mongoose.model('Incident', IncidentSchema);
