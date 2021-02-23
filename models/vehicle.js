@@ -17,7 +17,7 @@ var VehicleSchema = new Schema(
   );
 
     // Virtual for this author instance URL.
-PersonSchema.virtual('url').get(function () {
+VehicleSchema.virtual('url').get(function () {
     return '/data/vehicle/' + this._id;
   });
   
