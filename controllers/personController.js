@@ -60,10 +60,24 @@ exports.person_create_post = [
             // Create an person object with escaped and trimmed data.
             var person = new person(
                 {
+                    last_name: req.body.last_name,
                     first_name: req.body.first_name,
-                    family_name: req.body.family_name,
+                    middle_name: req.body.middle_name,
+                    aliases: req.body.aliases,
+                    code: req.body.code,
+                    social_security_number: req.body.social_security_number,
                     date_of_birth: req.body.date_of_birth,
-                    date_of_death: req.body.date_of_death
+                    race: req.body.race,
+                    sex: req.body.sex,
+                    height: req.body.height,
+                    weight: req.body.weight,
+                    eyes: req.body.eyes,
+                    hair: req.body.hair,
+                    scars_marks_tattoos: req.body.scars_marks_tattoos,
+                    address: req.body.address,
+                    phone_number: req.body.phone_number,
+                    gang_affiliation: req.body.gang_affiliation,
+                    hazard: req.body.hazard
                 });
             person.save(function (err) {
                 if (err) { return next(err); }
