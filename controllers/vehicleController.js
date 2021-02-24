@@ -1,9 +1,16 @@
-var vehicle = require('../models/vehicle');
+var Vehicle = require('../models/vehicle');
 
 // Display list of all vehicles.
-exports.vehicle_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: vehicle list');
-};
+exports.vehicle_list = function(req, res, next) {
+
+    Vehicle.find()
+      .exec(function (err, list_vehicles) {
+        if (err) { return next(err); }
+        //Successful, so render
+        res.render('vehicle_list', { title: 'Vehicle List', vehicle_list: list_vehicles });
+      });
+  
+  };
 
 // Display detail page for a specific vehicle.
 exports.vehicle_detail = function(req, res) {

@@ -1,9 +1,16 @@
-var person = require('../models/person');
+var Person = require('../models/person');
 
 // Display list of all persons.
-exports.person_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Person list');
-};
+exports.person_list = function(req, res, next) {
+
+    Person.find()
+      .exec(function (err, list_persons) {
+        if (err) { return next(err); }
+        //Successful, so render
+        res.render('person_list', { title: 'Person List', person_list: list_persons });
+      });
+  
+  };
 
 // Display detail page for a specific person.
 exports.person_detail = function(req, res) {
