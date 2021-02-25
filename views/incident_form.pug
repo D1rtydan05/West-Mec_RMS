@@ -18,6 +18,11 @@ block content
     div.form-group
       label(for='summary') Summary:
       textarea#summary.form-control(type='textarea', placeholder='Summary' name='summary' required='true') #{undefined===incident ? '' : incident.summary}
+      //- div.form-group
+      //- div.form-group(style='display: inline; padding-right:20px;')
+      //- label(for='hazard') Hazard:
+      //- input.checkbox-input(type='checkbox', name='hazard')
+      
     div.form-group
       label Vehicle:
       div
@@ -25,6 +30,8 @@ block content
           div(style='display: inline; padding-right:10px;')
             input.checkbox-input(type='checkbox', name='vehicle', id=vehicle._id, value=vehicle._id, checked=vehicle.checked )
             label(for=vehicle._id) #{vehicle.name}
+
+    div.form-group
     button.btn.btn-primary(type='submit') Submit
 
   if errors

@@ -13,6 +13,7 @@ var IncidentSchema = new Schema(
       report_date: { type: Date },
       report_time: { type: Date },
       narrative: {type: String, required: true},
+      hazard: {type: Boolean, default: false}
     }
   );
 

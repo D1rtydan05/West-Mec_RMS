@@ -9,7 +9,7 @@ var PersonSchema = new Schema(
       middle_name: {type: String, required: true, maxlength: 100},
       aliases: {type: String, required: true, maxlength: 100},
       code: { type: String, required: true, enum: ['RP1', 'W', 'V', 'IL4', 'S2'], default: 'W' },
-      social_security_number: {type: String, required: true, maxlength: 100},
+      social_security_number: {type: Number, required: true, minlength: 9, maxlength: 9},
       date_of_birth: { type: Date },
       race: { type: String, required: true, enum: ['W', 'B', 'H', 'I', 'A', 'U'], default: 'U' },
       sex: { type: String, required: true, enum: ['M', 'F', 'U'], default: 'U' },
@@ -25,7 +25,12 @@ var PersonSchema = new Schema(
     }
   );
 
-    // Virtual for this Person instance URL.
+    // Virtual for person "full" name.
+    PersonSchema.virtual('name').get(function () {
+      return this.last_name + ', ' + this.first_name + ' ' + this.middle_name;
+    });
+
+    // Virtual for this author instance URL.
 PersonSchema.virtual('url').get(function () {
     return '/data/person/' + this._id;
   });
