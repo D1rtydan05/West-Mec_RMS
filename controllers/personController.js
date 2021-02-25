@@ -19,43 +19,22 @@ exports.person_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Person detail: ' + req.params.id);
 };
 
-
-
-// // Display person create form on GET.
-// exports.person_create_get = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Person create GET');
-// };
 // Display Person create form on GET.
-// exports.person_create_get = function(req, res, next) {
-//     res.render('person_form', { title: 'Create Person'});
-// };
-exports.bookinstance_create_get = function(req, res, next) {
-
-    Book.find({},'title')
-    .exec(function (err, books) {
-      if (err) { return next(err); }
-      // Successful, so render.
-      res.render('bookinstance_form', {title: 'Create BookInstance', book_list: books});
-    });
-
+exports.person_create_get = function(req, res, next) {
+    res.render('person_form', { title: 'Create Person'});
 };
 
-
-
-// // Handle person create on POST.
-// exports.person_create_post = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Person create POST');
-// };
 // Handle Person create on POST.
 exports.person_create_post = [
 
-    // Validate and sanitise fields.
+    // Validate and sanitize fields.
+    body('last_name').trim().isLength({ min: 1 }).escape().withMessage('Last name must be specified.')
+        .isAlphanumeric().withMessage('Last name has non-alphanumeric characters.'),
     body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.')
         .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    body('family_name').trim().isLength({ min: 1 }).escape().withMessage('Family name must be specified.')
-        .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
-    body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601().toDate(),
-    body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601().toDate(),
+    body('middle_name').trim().isLength({ min: 1 }).escape().withMessage('Middle name/initial must be specified.')
+    .isAlphanumeric().withMessage('Middle name/initial has non-alphanumeric characters.'),
+
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -65,21 +44,14 @@ exports.person_create_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/errors messages.
-            res.render('person_form', { title: 'Create person', person: req.body, errors: errors.array() });
+            res.render('person_form', { title: 'Create Person', person: req.body, errors: errors.array() });
             return;
         }
         else {
             // Data from form is valid.
-            person.save(function (err) {
-                if (err) { return next(err); }
-                   // Successful - redirect to new record.
-                   res.redirect(person.url);
-                });
-        }
-    }
-];
-            // Create an person object with escaped and trimmed data.
-            var person = new person(
+
+            // Create an Person object with escaped and trimmed data.
+            var person = new Person(
                 {
                     last_name: req.body.last_name,
                     first_name: req.body.first_name,
@@ -98,9 +70,16 @@ exports.person_create_post = [
                     address: req.body.address,
                     phone_number: req.body.phone_number,
                     gang_affiliation: req.body.gang_affiliation,
-                    hazard: req.body.hazard
+                    hazard: req.body.hazard,
                 });
-            
+            person.save(function (err) {
+                if (err) { return next(err); }
+                // Successful - redirect to new person record.
+                res.redirect(person.url);
+            });
+        }
+    }
+];
 
 // Display person delete form on GET.
 exports.person_delete_get = function(req, res) {
@@ -121,9 +100,3 @@ exports.person_update_get = function(req, res) {
 exports.person_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Person update POST');
 };
-
-
-// ========================================================================================================================
-
-
-
