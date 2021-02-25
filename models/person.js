@@ -25,7 +25,7 @@ var PersonSchema = new Schema(
     }
   );
 
-    // Virtual for this author instance URL.
+    // Virtual for this Person instance URL.
 PersonSchema.virtual('url').get(function () {
     return '/data/person/' + this._id;
   });

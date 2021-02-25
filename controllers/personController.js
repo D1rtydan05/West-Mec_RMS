@@ -19,14 +19,28 @@ exports.person_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Person detail: ' + req.params.id);
 };
 
+
+
 // // Display person create form on GET.
 // exports.person_create_get = function(req, res) {
 //     res.send('NOT IMPLEMENTED: Person create GET');
 // };
 // Display Person create form on GET.
-exports.person_create_get = function(req, res, next) {
-    res.render('person_form', { title: 'Create Person'});
+// exports.person_create_get = function(req, res, next) {
+//     res.render('person_form', { title: 'Create Person'});
+// };
+exports.bookinstance_create_get = function(req, res, next) {
+
+    Book.find({},'title')
+    .exec(function (err, books) {
+      if (err) { return next(err); }
+      // Successful, so render.
+      res.render('bookinstance_form', {title: 'Create BookInstance', book_list: books});
+    });
+
 };
+
+
 
 // // Handle person create on POST.
 // exports.person_create_post = function(req, res) {
@@ -56,7 +70,14 @@ exports.person_create_post = [
         }
         else {
             // Data from form is valid.
-
+            person.save(function (err) {
+                if (err) { return next(err); }
+                   // Successful - redirect to new record.
+                   res.redirect(person.url);
+                });
+        }
+    }
+];
             // Create an person object with escaped and trimmed data.
             var person = new person(
                 {
@@ -79,14 +100,7 @@ exports.person_create_post = [
                     gang_affiliation: req.body.gang_affiliation,
                     hazard: req.body.hazard
                 });
-            person.save(function (err) {
-                if (err) { return next(err); }
-                // Successful - redirect to new person record.
-                res.redirect(person.url);
-            });
-        }
-    }
-];
+            
 
 // Display person delete form on GET.
 exports.person_delete_get = function(req, res) {

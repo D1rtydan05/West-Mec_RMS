@@ -5,17 +5,61 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      label(for='first_name') First Name:
-      input#first_name.form-control(type='text' placeholder='First name (Christian) last' name='first_name' required='true' value=(undefined===author ? '' : author.first_name) )
-      label(for='family_name') Family Name:
-      input#family_name.form-control(type='text' placeholder='Family name (surname)' name='family_name' required='true' value=(undefined===author ? '' : author.family_name))
+        label(for='last_name') last Name:
+        input#last_name.form-control(type='text' placeholder='Last name' name='last_name' required='true' value=(undefined===person ? '' : person.last_name))
+
+        label(for='first_name') First Name:
+        input#first_name.form-control(type='text' placeholder='First name' name='first_name' required='true' value=(undefined===person ? '' : person.first_name) )
+
+        label(for='middle_name') Middle Name:
+        input#middle_name.form-control(type='text' placeholder='middle name' name='middle_name' required='true' value=(undefined===person ? '' : person.middle_name))
+        
+        label(for='aliases') Aliases:
+        input#aliases.form-control(type='text' placeholder='Hotdog' name='aliases' required='true' value=(undefined===person ? '' : person.aliases))
     div.form-group
-      label(for='date_of_birth') Date of birth:
-      input#date_of_birth.form-control(type='date' name='date_of_birth' value=(undefined===author ? '' : author.date_of_birth) )
+        label(for='code') Code:
+        input#code.form-control(type='text' placeholder='W - witness' name='code' required='true' value=(undefined===person ? '' : person.code))
+
+        label(for='social_security_number') Social Security Number:
+        input#social_security_number.form-control(type='number' placeholder='000-00-0000' name='social_security_number' required='true' value=(undefined===person ? '' : person.social_security_number))
+
+        label(for='date_of_birth') Date of Birth:
+        input#date_of_birth.form-control(type='date' name='date_of_birth' required='true' value=(undefined===person ? '' : person.date_of_birth)) 
+                                                                                                                                //- may need to add the mm-dd-yyyy
+        label(for='race') Race:
+        input#race.form-control(type='text' placeholder='U - Unkown' name='race' required='true' value=(undefined===person ? '' : person.race))    
+
+        label(for='sex') Sex:
+        input#sex.form-control(type='text' placeholder='U - Unkown' name='sex' required='true' value=(undefined===person ? '' : person.sex))    
+
+        label(for='height') Height:
+        input#height.form-control(type='text' placeholder='0,00' name='height' required='true' value=(undefined===person ? '' : person.height))    
+
+        label(for='weight') Weight:
+        input#weight.form-control(type='text' placeholder='000' name='weight' required='true' value=(undefined===person ? '' : person.weight))    
     div.form-group  
         label(for='eyes') Eyes:
-        select#eyes.form-control(type='select', placeholder='Select eyes' name='eyes' required='true' );
+        select#eyes.form-control(type='select', placeholder='Select eyes' name='eyes' required='true' )
+            option(value="BLK", selected=(undefined===person || person.eyes!='BLK' ? false:'selected')) BLK
+
+        label(for='hair') Hair:
+        input#hair.form-control(type='text' placeholder='BLD - Bald' name='hair' required='true' value=(undefined===person ? '' : person.hair))    
+
+        label(for='scars_marks_tattoos') Scars,marks,tattoos:
+        input#scars_marks_tattoos.form-control(type='text' placeholder='' name='scars_marks_tattoos' required='true' value=(undefined===person ? '' : person.scars_marks_tattoos))
         
+        label(for='address') Address:
+        input#address.form-control(type='text' placeholder='' name='address' required='true' value=(undefined===person ? '' : person.address))
+
+        label(for='phone_number') Phone number:
+        input#phone_number.form-control(type='text' placeholder='000-000-0000' name='phone_number' required='true' value=(undefined===person ? '' : person.phone_number))
+
+        label(for='gang_affiliation') Gang Affiliation:
+        input#gang_affiliation.form-control(type='text' placeholder='000-000-0000' name='gang_affiliation' required='true' value=(undefined===person ? '' : person.gang_affiliation))
+
+        label(for='hazard') Hazard:
+        input#hazard.form-control(type='text' placeholder='000-000-0000' name='hazard' required='true' value=(undefined===person ? '' : person.hazard))
+
     button.btn.btn-primary(type='submit') Submit
   if errors
     ul
