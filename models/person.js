@@ -30,7 +30,7 @@ var PersonSchema = new Schema(
       return this.last_name + ', ' + this.first_name + ' ' + this.middle_name;
     });
 
-    // Virtual for this author instance URL.
+    // Virtual for this person instance URL.
 PersonSchema.virtual('url').get(function () {
     return '/data/person/' + this._id;
   });
