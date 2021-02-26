@@ -5,20 +5,25 @@ block content
 
   form(method='POST' action='')
     div.form-group
-        label(for='last_name') last Name:
+        label(for='last_name') Last Name:
         input#last_name.form-control(type='text' placeholder='Last name' name='last_name' required='true' value=(undefined===person ? '' : person.last_name))
 
         label(for='first_name') First Name:
         input#first_name.form-control(type='text' placeholder='First name' name='first_name' required='true' value=(undefined===person ? '' : person.first_name) )
 
         label(for='middle_name') Middle Name:
-        input#middle_name.form-control(type='text' placeholder='middle name' name='middle_name' required='true' value=(undefined===person ? '' : person.middle_name))
+        input#middle_name.form-control(type='text' placeholder='Middle name' name='middle_name' required='true' value=(undefined===person ? '' : person.middle_name))
         
         label(for='aliases') Aliases:
         input#aliases.form-control(type='text' placeholder='Hotdog' name='aliases' required='true' value=(undefined===person ? '' : person.aliases))
-    div.form-group
+    
         label(for='code') Code:
-        input#code.form-control(type='text' placeholder='W - witness' name='code' required='true' value=(undefined===person ? '' : person.code))
+        select#code.form-control(type='select' name='code' required='true' value=(undefined===person ? '' : person.code))
+          option(value="RP1", selected=(undefined===person || person.code!='RP1' ? false:'selected')) RP - Reporting Party
+          option(value="W", selected=(undefined===person || person.code!='W' ? false:'selected')) W - Witness
+          option(value="V", selected=(undefined===person || person.code!='V' ? false:'selected')) V - Victim
+          option(value="IL4", selected=(undefined===person || person.code!='IL4' ? false:'selected')) IL - Ivestigative Lead
+          option(value="S2", selected=(undefined===person || person.code!='S2' ? false:'selected')) S - Suspect
 
         label(for='social_security_number') Social Security Number:
         input#social_security_number.form-control(type='number' placeholder='000-00-0000' name='social_security_number' required='true' value=(undefined===person ? '' : person.social_security_number))
@@ -37,9 +42,9 @@ block content
 
         label(for='weight') Weight:
         input#weight.form-control(type='text' placeholder='000' name='weight' required='true' value=(undefined===person ? '' : person.weight))    
-    div.form-group  
+     
         label(for='eyes') Eyes:
-        select#eyes.form-control(type='select', placeholder='Select eyes' name='eyes' required='true' )
+        select#eyes.form-control(type='select', name='eyes' required='true' )
             option(value="BLK", selected=(undefined===person || person.eyes!='BLK' ? false:'selected')) BLK
 
         label(for='hair') Hair:
