@@ -58,7 +58,7 @@ block content
         input#gang_affiliation.form-control(type='text' placeholder='000-000-0000' name='gang_affiliation' required='true' value=(undefined===person ? '' : person.gang_affiliation))
 
         label(for='hazard') Hazard:
-        input#hazard.form-control(type='text' placeholder='000-000-0000' name='hazard' required='true' value=(undefined===person ? '' : person.hazard))
+        input.checkbox-input(type='checkbox', name='hazard')
 
     button.btn.btn-primary(type='submit') Submit
   if errors

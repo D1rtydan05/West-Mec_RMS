@@ -1,6 +1,8 @@
 const { body,validationResult } = require('express-validator');
+var async = require('async');
 
 var Person = require('../models/person');
+var Incident = require('../models/incident');
 
 // Display list of all persons.
 exports.person_list = function(req, res, next) {
@@ -14,9 +16,29 @@ exports.person_list = function(req, res, next) {
   
   };
 
-// Display detail page for a specific person.
-exports.person_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Person detail: ' + req.params.id);
+// Display detail page for a specific Person.
+exports.person_detail = function(req, res, next) {
+
+    async.parallel({
+        person: function(callback) {
+            Person.findById(req.params.id)
+              .exec(callback)
+        },
+        persons_incidents: function(callback) {
+          Incident.find({ 'person': req.params.id },'title summary')
+          .exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); } // Error in API usage.
+        if (results.person==null) { // No results.
+            var err = new Error('Person not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render.
+        res.render('person_detail', { title: 'Person Detail', person: results.person, person_incidents: results.persons_incidents } );
+    });
+
 };
 
 // Display Person create form on GET.
@@ -28,12 +50,13 @@ exports.person_create_get = function(req, res, next) {
 exports.person_create_post = [
 
     // Validate and sanitize fields.
-    body('last_name').trim().isLength({ min: 1 }).escape().withMessage('Last name must be specified.')
-        .isAlphanumeric().withMessage('Last name has non-alphanumeric characters.'),
-    body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.')
-        .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    body('middle_name').trim().isLength({ min: 1 }).escape().withMessage('Middle name/initial must be specified.')
-    .isAlphanumeric().withMessage('Middle name/initial has non-alphanumeric characters.'),
+    body('last_name').trim().isLength({ min: 1 }).escape().withMessage('Last name must be specified.'),
+        //.isAlphanumeric().withMessage('Last name has non-alphanumeric characters.'),
+    body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.'),
+        //.isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
+    body('middle_name').trim().isLength({ min: 1 }).escape().withMessage('Middle name/initial must be specified.'),
+    //.isAlphanumeric().withMessage('Middle name/initial has non-alphanumeric characters.'),
+    body('hazard').toBoolean(),
 
 
     // Process request after validation and sanitization.
