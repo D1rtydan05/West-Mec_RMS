@@ -19,8 +19,8 @@ block content
     
         label(for='code') Code:
         select#code.form-control(type='select' name='code' required='true' value=(undefined===person ? '' : person.code))
-          option(value="RP1", selected=(undefined===person || person.code!='RP1' ? false:'selected')) RP - Reporting Party
           option(value="W", selected=(undefined===person || person.code!='W' ? false:'selected')) W - Witness
+          option(value="RP1", selected=(undefined===person || person.code!='RP1' ? false:'selected')) RP - Reporting Party
           option(value="V", selected=(undefined===person || person.code!='V' ? false:'selected')) V - Victim
           option(value="IL4", selected=(undefined===person || person.code!='IL4' ? false:'selected')) IL - Ivestigative Lead
           option(value="S2", selected=(undefined===person || person.code!='S2' ? false:'selected')) S - Suspect
@@ -32,23 +32,49 @@ block content
         input#date_of_birth.form-control(type='date' name='date_of_birth' required='true' value=(undefined===person ? '' : person.date_of_birth)) 
                                                                                                                                 //- may need to add the mm-dd-yyyy
         label(for='race') Race:
-        input#race.form-control(type='text' placeholder='U - Unkown' name='race' required='true' value=(undefined===person ? '' : person.race))    
-
+        Select#race.form-control(type='select' name='race' required='true' value=(undefined===person ? '' : person.race))
+          option(value="U", selected=(undefined===person || person.race!='U' ? false:'selected')) U - Unknown
+          option(value="W", selected=(undefined===person || person.race!='W' ? false:'selected')) W - White
+          option(value="B", selected=(undefined===person || person.race!='B' ? false:'selected')) B - Black
+          option(value="H", selected=(undefined===person || person.race!='H' ? false:'selected')) H - Hispanic
+          option(value="I", selected=(undefined===person || person.race!='I' ? false:'selected')) I - Indian / Native American
+          option(value="A", selected=(undefined===person || person.race!='A' ? false:'selected')) A - Asian
+          
         label(for='sex') Sex:
-        input#sex.form-control(type='text' placeholder='U - Unkown' name='sex' required='true' value=(undefined===person ? '' : person.sex))    
+        Select#sex.form-control(type='Select' name='sex' required='true' value=(undefined===person ? '' : person.sex))    
+          option(value="U", selected=(undefined===person || person.sex!='U' ? false:'selected')) U - Unknown
+          option(value="M", selected=(undefined===person || person.sex!='M' ? false:'selected')) M - Male
+          option(value="F", selected=(undefined===person || person.sex!='F' ? false:'selected')) F - Female
 
         label(for='height') Height:
-        input#height.form-control(type='text' placeholder='0,00' name='height' required='true' value=(undefined===person ? '' : person.height))    
+        input#height.form-control(type='number' placeholder='0,00' name='height' required='true' value=(undefined===person ? '' : person.height))    
 
         label(for='weight') Weight:
-        input#weight.form-control(type='text' placeholder='000' name='weight' required='true' value=(undefined===person ? '' : person.weight))    
+        input#weight.form-control(type='number' placeholder='000' name='weight' required='true' value=(undefined===person ? '' : person.weight))    
      
         label(for='eyes') Eyes:
         select#eyes.form-control(type='select', name='eyes' required='true' )
-            option(value="BLK", selected=(undefined===person || person.eyes!='BLK' ? false:'selected')) BLK
+          option(value="BRO", selected=(undefined===person || person.eyes!='BRO' ? false:'selected')) BRO - Brown
+          option(value="BLK", selected=(undefined===person || person.eyes!='BLK' ? false:'selected')) BLK - Black
+          option(value="BLU", selected=(undefined===person || person.eyes!='BLU' ? false:'selected')) BLU - Blue
+          option(value="GRY", selected=(undefined===person || person.eyes!='GRY' ? false:'selected')) GRY - Gray
+          option(value="GRN", selected=(undefined===person || person.eyes!='GRN' ? false:'selected')) GRN - Green
+          option(value="WHI", selected=(undefined===person || person.eyes!='WHI' ? false:'selected')) WHI - White
+          option(value="HAZ", selected=(undefined===person || person.eyes!='HAZ' ? false:'selected')) HAZ - Hazel
+          option(value="RED", selected=(undefined===person || person.eyes!='RED' ? false:'selected')) RED - Red
 
         label(for='hair') Hair:
-        input#hair.form-control(type='text' placeholder='BLD - Bald' name='hair' required='true' value=(undefined===person ? '' : person.hair))    
+        Select#hair.form-control(type='Select' name='hair' required='true' value=(undefined===person ? '' : person.hair))   
+          option(value="BLD", selected=(undefined===person || person.eyes!='BLD' ? false:'selected')) BLD - Bald 
+          option(value="BLK", selected=(undefined===person || person.eyes!='BLK' ? false:'selected')) BLK - Black
+          option(value="BLU", selected=(undefined===person || person.eyes!='BLU' ? false:'selected')) BLU - Blue
+          option(value="BRO", selected=(undefined===person || person.eyes!='BRO' ? false:'selected')) BRO - Brown
+          option(value="GRY", selected=(undefined===person || person.eyes!='GRY' ? false:'selected')) GRY - Gray    
+          option(value="GRN", selected=(undefined===person || person.eyes!='GRN' ? false:'selected')) GRN - Green
+          option(value="WHI", selected=(undefined===person || person.eyes!='WHI' ? false:'selected')) WHI - White
+          option(value="BLN", selected=(undefined===person || person.eyes!='BLN' ? false:'selected')) BLN - Blonde
+          option(value="HAZ", selected=(undefined===person || person.eyes!='HAZ' ? false:'selected')) HAZ - Hazel
+          option(value="RED", selected=(undefined===person || person.eyes!='RED' ? false:'selected')) RED - Red     
 
         label(for='scars_marks_tattoos') Scars,marks,tattoos:
         input#scars_marks_tattoos.form-control(type='text' placeholder='' name='scars_marks_tattoos' required='true' value=(undefined===person ? '' : person.scars_marks_tattoos))
@@ -57,10 +83,10 @@ block content
         input#address.form-control(type='text' placeholder='' name='address' required='true' value=(undefined===person ? '' : person.address))
 
         label(for='phone_number') Phone number:
-        input#phone_number.form-control(type='text' placeholder='000-000-0000' name='phone_number' required='true' value=(undefined===person ? '' : person.phone_number))
+        input#phone_number.form-control(type='number' placeholder='000-000-0000' name='phone_number' required='true' value=(undefined===person ? '' : person.phone_number))
 
         label(for='gang_affiliation') Gang Affiliation:
-        input#gang_affiliation.form-control(type='text' placeholder='000-000-0000' name='gang_affiliation' required='true' value=(undefined===person ? '' : person.gang_affiliation))
+        input#gang_affiliation.form-control(type='text' placeholder='' name='gang_affiliation' required='true' value=(undefined===person ? '' : person.gang_affiliation))
 
         label(for='hazard') Hazard:
         input.checkbox-input(type='checkbox', name='hazard')
