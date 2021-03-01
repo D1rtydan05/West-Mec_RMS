@@ -114,12 +114,77 @@ exports.person_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Person delete POST');
 };
 
-// Display person update form on GET.
-exports.person_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Person update GET');
+// Display Person update form on GET.
+exports.person_update_get = function (req, res, next) {
+
+    Person.findById(req.params.id, function (err, person) {
+        if (err) { return next(err); }
+        if (person == null) { // No results.
+            var err = new Error('Person not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        res.render('person_form', { title: 'Update Person', person: person });
+
+    });
 };
 
-// Handle person update on POST.
-exports.person_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Person update POST');
-};
+// Handle Person update on POST.
+exports.person_update_post = [
+
+    // Validate and sanitize fields.
+    body('last_name').trim().isLength({ min: 1 }).escape().withMessage('Last name must be specified.'),
+        //.isAlphanumeric().withMessage('Last name has non-alphanumeric characters.'),
+    body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.'),
+        //.isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
+    body('middle_name').trim().isLength({ min: 1 }).escape().withMessage('Middle name/initial must be specified.'),
+    //.isAlphanumeric().withMessage('Middle name/initial has non-alphanumeric characters.'),
+    body('hazard').toBoolean(),
+
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create Person object with escaped and trimmed data (and the old id!)
+        var person = new Person(
+            {
+                last_name: req.body.last_name,
+                first_name: req.body.first_name,
+                middle_name: req.body.middle_name,
+                aliases: req.body.aliases,
+                code: req.body.code,
+                social_security_number: req.body.social_security_number,
+                date_of_birth: req.body.date_of_birth,
+                race: req.body.race,
+                sex: req.body.sex,
+                height: req.body.height,
+                weight: req.body.weight,
+                eyes: req.body.eyes,
+                hair: req.body.hair,
+                scars_marks_tattoos: req.body.scars_marks_tattoos,
+                address: req.body.address,
+                phone_number: req.body.phone_number,
+                gang_affiliation: req.body.gang_affiliation,
+                hazard: req.body.hazard,
+                _id: req.params.id
+            });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values and error messages.
+            res.render('person_form', { title: 'Update Person', person: person, errors: errors.array() });
+            return;
+        }
+        else {
+            // Data from form is valid. Update the record.
+            Person.findByIdAndUpdate(req.params.id, person, {}, function (err, theperson) {
+                if (err) { return next(err); }
+                // Successful - redirect to genre detail page.
+                res.redirect(theperson.url);
+            });
+        }
+    }
+];

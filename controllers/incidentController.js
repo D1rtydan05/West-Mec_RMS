@@ -138,11 +138,110 @@ exports.incident_delete_post = function(req, res) {
 };
 
 // Display incident update form on GET.
-exports.incident_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: incident update GET');
+exports.incident_update_get = function (req, res, next) {
+
+    // Get incident, persons and vehicles for form.
+    async.parallel({
+        incident: function (callback) {
+            Incident.findById(req.params.id).populate('person').populate('vehicle').exec(callback);
+        },
+        persons: function (callback) {
+            Person.find(callback);
+        },
+        vehicles: function (callback) {
+            Vehicle.find(callback);
+        },
+    }, function (err, results) {
+        if (err) { return next(err); }
+        if (results.incident == null) { // No results.
+            var err = new Error('Incident not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        // Mark our selected vehicles as checked.
+        for (var all_g_iter = 0; all_g_iter < results.vehicles.length; all_g_iter++) {
+            for (var incident_g_iter = 0; incident_g_iter < results.incident.vehicle.length; incident_g_iter++) {
+                if (results.vehicles[all_g_iter]._id.toString() === results.incident.vehicle[incident_g_iter]._id.toString()) {
+                    results.vehicles[all_g_iter].checked = 'true';
+                }
+            }
+        }
+        res.render('incident_form', { title: 'Update Incident', persons: results.persons, vehicles: results.vehicles, incident: results.incident });
+    });
+
 };
 
+
 // Handle incident update on POST.
-exports.incident_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: incident update POST');
-};
+exports.incident_update_post = [
+
+    // Convert the vehicle to an array.
+    (req, res, next) => {
+        if (!(req.body.vehicle instanceof Array)) {
+            if (typeof req.body.vehicle === 'undefined')
+                req.body.vehicle = [];
+            else
+                req.body.vehicle = new Array(req.body.vehicle);
+        }
+        next();
+    },
+
+    // Validate and santitize fields.
+    body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('person', 'Person must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('isbn', 'ISBN must not be empty').trim().isLength({ min: 1 }).escape(),
+    body('vehicle.*').escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a Incident object with escaped/trimmed data and old id.
+        var incident = new Incident(
+            {
+                title: req.body.title,
+                person: req.body.person,
+                summary: req.body.summary,
+                isbn: req.body.isbn,
+                vehicle: (typeof req.body.vehicle === 'undefined') ? [] : req.body.vehicle,
+                _id: req.params.id // This is required, or a new ID will be assigned!
+            });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/error messages.
+
+            // Get all persons and vehicles for form
+            async.parallel({
+                persons: function (callback) {
+                    Person.find(callback);
+                },
+                vehicles: function (callback) {
+                    Vehicle.find(callback);
+                },
+            }, function (err, results) {
+                if (err) { return next(err); }
+
+                // Mark our selected vehicles as checked.
+                for (let i = 0; i < results.vehicles.length; i++) {
+                    if (incident.vehicle.indexOf(results.vehicles[i]._id) > -1) {
+                        results.vehicles[i].checked = 'true';
+                    }
+                }
+                res.render('incident_form', { title: 'Update Incident', persons: results.persons, vehicles: results.vehicles, incident: incident, errors: errors.array() });
+            });
+            return;
+        }
+        else {
+            // Data from form is valid. Update the record.
+            Incident.findByIdAndUpdate(req.params.id, incident, {}, function (err, theincident) {
+                if (err) { return next(err); }
+                // Successful - redirect to incident detail page.
+                res.redirect(theincident.url);
+            });
+        }
+    }
+];
