@@ -1,0 +1,82 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+        label(for='license_plate') license plate:
+        input#license_plate.form-control(type='text' placeholder='' name='license_plate' required='true' value=(undefined===vehicle ? '' : vehicle.license_plate))
+
+        label(for='color') Color:
+        select#color.form-control(type='select' placeholder='' name='color' required='true' value=(undefined===vehicle ? '' : vehicle.color))
+            option(value="UNK", selected=(undefined===vehicle || vehicle.color!='UNK' ? false:'selected')) UNK - Unknown / Other
+            option(value="BGE", selected=(undefined===vehicle || vehicle.color!='BGE' ? false:'selected')) BGE - Beige
+            option(value="BLK", selected=(undefined===vehicle || vehicle.color!='BLK' ? false:'selected')) BLK - Black
+            option(value="BLU", selected=(undefined===vehicle || vehicle.color!='BLU' ? false:'selected')) BLU - Blue
+            option(value="DBL", selected=(undefined===vehicle || vehicle.color!='DBL' ? false:'selected')) DBL - Dark Blue
+            option(value="LBL", selected=(undefined===vehicle || vehicle.color!='LBL' ? false:'selected')) LBL - Light Blue
+            option(value="BRZ", selected=(undefined===vehicle || vehicle.color!='BRZ' ? false:'selected')) BRZ - Bronze
+            option(value="BRO", selected=(undefined===vehicle || vehicle.color!='BRO' ? false:'selected')) BRO - Brown
+            option(value="GLD", selected=(undefined===vehicle || vehicle.color!='GLD' ? false:'selected')) GLD - Gold
+            option(value="GRY", selected=(undefined===vehicle || vehicle.color!='GRY' ? false:'selected')) GRY - Gray
+            option(value="GRN", selected=(undefined===vehicle || vehicle.color!='GRN' ? false:'selected')) GRN - Green
+            option(value="MAR", selected=(undefined===vehicle || vehicle.color!='MAR' ? false:'selected')) MAR - Maroon
+            option(value="ORG", selected=(undefined===vehicle || vehicle.color!='ORG' ? false:'selected')) ORG - Orange
+            option(value="PNK", selected=(undefined===vehicle || vehicle.color!='PNK' ? false:'selected')) PNK - Pink
+            option(value="PLE", selected=(undefined===vehicle || vehicle.color!='PLE' ? false:'selected')) PLE - Purple
+            option(value="RED", selected=(undefined===vehicle || vehicle.color!='RED' ? false:'selected')) RED - Red
+            option(value="SIL", selected=(undefined===vehicle || vehicle.color!='SIL' ? false:'selected')) SIL - Silver
+            option(value="TAN", selected=(undefined===vehicle || vehicle.color!='TAN' ? false:'selected')) TAN - Tan
+            option(value="TRQ", selected=(undefined===vehicle || vehicle.color!='TRQ' ? false:'selected')) TRQ - Turquoise
+            option(value="WHI", selected=(undefined===vehicle || vehicle.color!='WHI' ? false:'selected')) WHI - White
+            option(value="YEL", selected=(undefined===vehicle || vehicle.color!='YEL' ? false:'selected')) YEL - Yellow
+            option(value="TEA", selected=(undefined===vehicle || vehicle.color!='TEA' ? false:'selected')) TEA - Teal
+
+        label(for='year') year:
+        input#year.form-control(type='Date' placeholder='' name='year' required='true' value=(undefined===vehicle ? '' : vehicle.year))
+
+        label(for='makes') Makes:
+        input#makes.form-control(type='text' placeholder='' name='makes' required='true' value=(undefined===vehicle ? '' : vehicle.makes))
+
+        label(for='model') Model:
+        input#model.form-control(type='text' placeholder='' name='model' required='true' value=(undefined===vehicle ? '' : vehicle.model))
+
+        label(for='body_type') Body Type:
+        Select#body_type.form-control(type='Select' placeholder='' name='body_type' required='true' value=(undefined===vehicle ? '' : vehicle.body_type))
+            option(value="2D", selected=(undefined===vehicle || vehicle.body_type!='2D' ? false:'selected')) 2D - Two Door
+            option(value="4D", selected=(undefined===vehicle || vehicle.body_type!='4D' ? false:'selected')) 4D - Four Door
+            option(value="PK", selected=(undefined===vehicle || vehicle.body_type!='PK' ? false:'selected')) PK - Pickup
+            option(value="VN", selected=(undefined===vehicle || vehicle.body_type!='VN' ? false:'selected')) VN - Van
+            option(value="PC", selected=(undefined===vehicle || vehicle.body_type!='PC' ? false:'selected')) PC - Passenger Car
+
+        label(for='vin') VIN:
+        input#vin.form-control(type='text' placeholder='' name='vin' required='true' value=(undefined===vehicle ? '' : vehicle.vin))
+
+        //- label(for='registered_owner') Registered Owner:
+        //- input#registered_owner.form-control(type='text' placeholder='' name='registered_owner' required='true' value=(undefined===vehicle ? '' : vehicle.registered_owner))
+
+        //- label(for='registered_owner') Registered Owner:
+        //- select#registered_owner.form-control(type='select', placeholder='Select person' name='person' required='true' )
+        //-     for person in persons
+        //-         if vehicle
+        //-             option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
+        //-         else
+        //-             option(value=person._id) #{person.name}
+        label(for='registered_owner') registered owner:
+            select#registered_owner.form-control(type='select', placeholder='Select Owner' name='registered_owner' required='true' )
+            
+                if vehicle
+                    option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
+                else
+                    option(value=person._id) #{person.name}
+
+        label(for='additional_details') Additional details:
+        input#additional_details.form-control(type='text' placeholder='' name='additional_details' required='true' value=(undefined===vehicle ? '' : vehicle.additional_details))
+
+        button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
