@@ -63,17 +63,25 @@ block content
                      option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
                  else
                      option(value=person._id) #{person.name}
-        label(for='person') registered owner:
-            select#person.form-control(type='select', placeholder='Select Owner' name='person' required='true' )
-            for person in persons
-                if vehicle
-                    option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
-                else
-                    option(value=person._id) #{person.name}
-
+        //- label(for='person') registered owner:
+        //-     select#person.form-control(type='select', placeholder='Select Owner' name='person' required='true' )
+        //-     for person in persons
+        //-         if vehicle
+        //-                 option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
+        //-         else
+        //-                 option(value=person._id) #{person.name}
+    div.form-group
+        label(for='person') Person (Optional):
+        select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
+        for person in persons
+            if incident
+                option(value=person._id selected=(person._id.toString()===incident.person._id.toString() ? 'selected' : false) ) #{person.name}
+            else
+                option(value=person._id) #{person.name}
+    div.form-group
         label(for='additional_details') Additional details:
         input#additional_details.form-control(type='text' placeholder='' name='additional_details' required='true' value=(undefined===vehicle ? '' : vehicle.additional_details))
-
+    div.form-group
         button.btn.btn-primary(type='submit') Submit
 
   if errors
