@@ -11,7 +11,7 @@ var VehicleSchema = new Schema(
       model: {type: String, required: true, maxlength: 100},
       body_type: { type: String, required: true, enum: ['2D', '4D', 'PK', 'VN', 'PC'], default: '2D' },
       vin: {type: String, required: true, maxlength: 17},
-      registered_owner: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
+      person: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
       additional_details: {type: String, required: false},
     }
   );

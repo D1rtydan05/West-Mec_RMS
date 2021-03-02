@@ -66,7 +66,7 @@ exports.vehicle_create_post =  [
           model: req.body.model,
           body_type: req.body.body_type,
           vin: req.body.vin,
-          registered_owner: req.body.registered_owner,
+          person: req.body.person,
           additional_details: req.body.additional_details, 
         }
       );
@@ -150,7 +150,7 @@ exports.vehicle_update_post = [
           model: req.body.model,
           body_type: req.body.body_type,
           vin: req.body.vin,
-          registered_owner: req.body.registered_owner,
+          person: req.body.person,
           additional_details: req.body.additional_details, 
           _id: req.params.id
           }
