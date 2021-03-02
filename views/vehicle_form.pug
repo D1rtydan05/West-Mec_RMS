@@ -65,7 +65,7 @@ block content
         //-             option(value=person._id) #{person.name}
         label(for='registered_owner') registered owner:
             select#registered_owner.form-control(type='select', placeholder='Select Owner' name='registered_owner' required='true' )
-            
+            for registered_owner in registered_owners
                 if vehicle
                     option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
                 else
