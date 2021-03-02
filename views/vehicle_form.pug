@@ -71,13 +71,13 @@ block content
         //-         else
         //-                 option(value=person._id) #{person.name}
     div.form-group
-        label(for='person') Person (Optional):
+        label(for='person') Registered Person :
         select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
-        for person in persons
-            if incident
-                option(value=person._id selected=(person._id.toString()===incident.person._id.toString() ? 'selected' : false) ) #{person.name}
-            else
-                option(value=person._id) #{person.name}
+            for person in persons
+                if incident
+                    option(value=person._id selected=(person._id.toString()===incident.person._id.toString() ? 'selected' : false) ) #{person.name}
+                else
+                    option(value=person._id) #{person.name}
     div.form-group
         label(for='additional_details') Additional details:
         input#additional_details.form-control(type='text' placeholder='' name='additional_details' required='true' value=(undefined===vehicle ? '' : vehicle.additional_details))
