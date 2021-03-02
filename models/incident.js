@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var IncidentSchema = new Schema(
     {
+      ir: {type: String, required: true, maxlength: 12},
       location: {type: String, required: true, maxlength: 100},
       location_name: {type: String, required: true, maxlength: 100},
       code: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
@@ -11,9 +12,9 @@ var IncidentSchema = new Schema(
       officer: {type: String, required: true, maxlength: 100},
       officer_badge: {type: String, required: true, maxlength: 100},
       report_date: { type: Date },
-      report_time: { type: Date },
+      report_time: {type: String, required: true, maxlength: 20},
       narrative: {type: String, required: true},
-      hazard: {type: Boolean, default: false}
+      person: { type: Schema.Types.ObjectId, ref: 'Person', required: false }
     }
   );
 

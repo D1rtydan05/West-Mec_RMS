@@ -73,10 +73,9 @@ exports.incident_create_post = [
     },
 
     // Validate and sanitise fields.
-    body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('ir', 'Ir must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('person', 'Person must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('narrative', 'Narrative must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('vehicle.*').escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -86,10 +85,17 @@ exports.incident_create_post = [
 
         // Create a Incident object with escaped and trimmed data.
         var incident = new Incident(
-          { title: req.body.title,
-            person: req.body.person,
+          { ir: req.body.ir,
+            location: req.body.location,
+            location_name: req.body.location_name,
+            code: req.body.code,
+            radio_code: req.body.radio_code,
+            officer: req.body.officer,
+            officer_badge: req.body.officer_badge,
+            report_date: req.body.report_date,
+            report_time: req.body.report_time,
             narrative: req.body.narrative,
-            vehicle: req.body.vehicle
+            person: req.body.person,
            });
 
         if (!errors.isEmpty()) {
@@ -188,11 +194,9 @@ exports.incident_update_post = [
     },
 
     // Validate and santitize fields.
-    body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('ir', 'Ir must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('person', 'Person must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('isbn', 'ISBN must not be empty').trim().isLength({ min: 1 }).escape(),
-    body('vehicle.*').escape(),
+    body('narrative', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -202,13 +206,18 @@ exports.incident_update_post = [
 
         // Create a Incident object with escaped/trimmed data and old id.
         var incident = new Incident(
-            {
-                title: req.body.title,
-                person: req.body.person,
-                summary: req.body.summary,
-                isbn: req.body.isbn,
-                vehicle: (typeof req.body.vehicle === 'undefined') ? [] : req.body.vehicle,
-                _id: req.params.id // This is required, or a new ID will be assigned!
+            { ir: req.body.ir,
+              location: req.body.location,
+              location_name: req.body.location_name,
+              code: req.body.code,
+              radio_code: req.body.radio_code,
+              officer: req.body.officer,
+              officer_badge: req.body.officer_badge,
+              report_date: req.body.report_date,
+              report_time: req.body.report_time,
+              narrative: req.body.narrative,
+              person: req.body.person,
+              _id: req.params.id // This is required, or a new ID will be assigned!
             });
 
         if (!errors.isEmpty()) {

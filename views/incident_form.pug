@@ -5,10 +5,10 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      label(for='title') Title:
-      input#title.form-control(type='text', placeholder='Name of incident' name='title' required='true' value=(undefined===incident ? '' : incident.title) )
+      label(for='ir') Incident Report Number:
+      input#title.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
     div.form-group
-      label(for='person') Person:
+      label(for='person') Person (Optional):
       select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
         for person in persons
           if incident
@@ -16,8 +16,8 @@ block content
           else
             option(value=person._id) #{person.name}
     div.form-group
-      label(for='summary') Summary:
-      textarea#summary.form-control(type='textarea', placeholder='Summary' name='summary' required='true') #{undefined===incident ? '' : incident.summary}
+      label(for='narrative') Narrative:
+      textarea#narrative.form-control(type='textarea', placeholder='Narrative' name='narrative' required='true') #{undefined===incident ? '' : incident.narrative}
       //- div.form-group
       //- div.form-group(style='display: inline; padding-right:20px;')
       //- label(for='hazard') Hazard:
