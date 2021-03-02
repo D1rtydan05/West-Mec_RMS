@@ -7,6 +7,32 @@ block content
     div.form-group
       label(for='ir') Incident Report Number:
       input#title.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
+      //- why title?
+
+      label(for='location') Location:
+      input#location.form-control(type='text' placeholder='1234 street st' name='location' required='true' value=(undefined===incident ? '' : incident.location)) 
+
+      label(for='location_name') Location name:
+      input#location_name.form-control(type='text' placeholder='McDonalds' name='location_name' required='true' value=(undefined===incident ? '' : incident.location_name)) 
+
+      //- label(for='code') Code:
+      //- input#code.form-control(type='text' placeholder='1234' name='code' required='true' value=(undefined===incident ? '' : incident.code))
+
+      label(for='radio_code') Radio Code:
+      input#radio_code.form-control(type='text' placeholder='1234' name='radio_code' required='true' value=(undefined===incident ? '' : incident.radio_code)) 
+
+      label(for='officer') Officer:
+      input#officer.form-control(type='text' placeholder='Bob Jones' name='officer' required='true' value=(undefined===incident ? '' : incident.officer)) 
+
+      label(for='officer_badge') Officer Badge:
+      input#officer_badge.form-control(type='text' placeholder='1234' name='officer_badge' required='true' value=(undefined===incident ? '' : incident.officer_badge)) 
+
+      label(for='report_date') Report Date:
+      input#report_date.form-control(type='date' placeholder='1234' name='report_date' required='true' value=(undefined===incident ? '' : incident.report_date)) 
+
+      label(for='report_time') Report Time:
+      input#report_time.form-control(type='text' placeholder='1234' name='report_time' required='true' value=(undefined===incident ? '' : incident.report_time)) 
+
     div.form-group
       label(for='person') Person (Optional):
       select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
