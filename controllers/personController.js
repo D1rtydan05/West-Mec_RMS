@@ -1,6 +1,5 @@
 const { body,validationResult } = require('express-validator');
 var async = require('async');
-
 var Person = require('../models/person');
 var Incident = require('../models/incident');
 

@@ -1,5 +1,8 @@
 const { body,validationResult } = require('express-validator');
 var Vehicle = require('../models/vehicle');
+var async = require('async');
+var Person = require('../models/person');
+var Incident = require('../models/incident');
 
 // Display list of all vehicles.
 exports.vehicle_list = function(req, res, next) {
@@ -40,10 +43,23 @@ exports.vehicle_detail = function(req, res, next) {
 
 };
 
-// Display Vehicle create form on GET.
+// Display vehicle create form on GET.
 exports.vehicle_create_get = function(req, res, next) {
-    res.render('vehicle_form', { title: 'Create Vehicle' });
-  };
+
+  // Get all persons and incidents, which we can use for adding to our incident.
+  async.parallel({
+      persons: function(callback) {
+          Person.find(callback);
+      },
+      incidents: function(callback) {
+          Incident.find(callback);
+      },
+  }, function(err, results) {
+      if (err) { return next(err); }
+      res.render('vehicle_form', { title: 'Create Vehicle', persons: results.persons, incidents: results.incidents });
+  });
+
+};
 
 // Handle Vehicle create on POST.
 exports.vehicle_create_post =  [
