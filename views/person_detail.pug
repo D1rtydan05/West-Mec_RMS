@@ -2,6 +2,23 @@ extends layout
 
 block content
 
+    h1 Person: #{person.name}
+    p #{person.date_of_birth}
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+    h4 Incidents
+    
+    dl
+    each incident in person_incidents
+      dt 
+        a(href=incident.url) #{incident.title}
+      dd #{incident.summary}
+
+    else
+      p This Person has no Incidents.
+      
+    hr
 
 
     p
