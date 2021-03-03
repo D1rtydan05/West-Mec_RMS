@@ -7,7 +7,6 @@ var IncidentSchema = new Schema(
       ir: {type: String, required: true, maxlength: 12},
       location: {type: String, required: true, maxlength: 100},
       location_name: {type: String, required: true, maxlength: 100},
-      code: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
       radio_code: {type: String, required: true, maxlength: 100},
       officer: {type: String, required: true, maxlength: 100},
       officer_badge: {type: String, required: true, maxlength: 100},
@@ -18,6 +17,8 @@ var IncidentSchema = new Schema(
     }
   );
 
+
+  
   // Virtual for this author instance URL.
 IncidentSchema.virtual('url').get(function () {
   return '/data/incident/' + this._id;

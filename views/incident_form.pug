@@ -6,7 +6,7 @@ block content
   form(method='POST' action='')
     div.form-group
       label(for='ir') Incident Report Number:
-      input#title.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
+      input#ir.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
       //- why title?
 
       label(for='location') Location:

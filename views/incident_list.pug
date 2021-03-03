@@ -4,11 +4,9 @@ block content
   h1= title
 
   ul
-    - incident_list.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
     each incident in incident_list
       li
-        a(href=incident.url) #{incident.title}
-        |  (#{incident.person.name})
+        a(href=incident.url) #{incident.ir}
 
     else
       li There are no incidents.

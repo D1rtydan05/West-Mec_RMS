@@ -25,7 +25,7 @@ exports.index = function(req, res) {
 // Display list of all Incidents.
 exports.incident_list = function(req, res, next) {
 
-    Incident.find({}, 'title incident')
+    Incident.find({}, 'ir incident')
       .populate('incident')
       .exec(function (err, list_incidents) {
         if (err) { return next(err); }
@@ -36,8 +36,28 @@ exports.incident_list = function(req, res, next) {
   };
 
 // Display detail page for a specific incident.
-exports.incident_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: incident detail: ' + req.params.id);
+exports.incident_detail = function (req, res, next) {
+
+    async.parallel({
+        incident: function (callback) {
+
+            Incident.findById(req.params.id)
+                .populate('person')
+                .populate('vehicle')
+                .exec(callback);
+        },
+
+    }, function (err, results) {
+        if (err) { return next(err); }
+        if (results.incident == null) { // No results.
+            var err = new Error('Incident not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render.
+        res.render('incident_detail', { title: results.incident.title, incident: results.incident});
+    });
+
 };
 
 // Display incident create form on GET.
@@ -88,7 +108,6 @@ exports.incident_create_post = [
           { ir: req.body.ir,
             location: req.body.location,
             location_name: req.body.location_name,
-            code: req.body.code,
             radio_code: req.body.radio_code,
             officer: req.body.officer,
             officer_badge: req.body.officer_badge,
@@ -209,7 +228,6 @@ exports.incident_update_post = [
             { ir: req.body.ir,
               location: req.body.location,
               location_name: req.body.location_name,
-              code: req.body.code,
               radio_code: req.body.radio_code,
               officer: req.body.officer,
               officer_badge: req.body.officer_badge,
