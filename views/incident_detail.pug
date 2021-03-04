@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 #{ir}: #{incident.ir}
+
+  p #[strong Person:]
+    a(href=Incident.Person.url) #{Incident.Person.name}
+  p #[strong Summary:] #{Incident.narrative}
+  p #[strong ISBN:] #{Incident.isbn}
+  p #[strong Genre:]
+    each val, index in book.genre
+      a(href=val.url) #{val.name}
+      if index < book.genre.length - 1
+        
+
+    //- div(style='margin-left:20px;margin-top:20px')
+
+    else
+      p There are no incidents.
+
+    hr
+  p
+    a(href=book.url+'/delete') Delete Book
+  p
+    a(href=book.url+'/update') Update Book
