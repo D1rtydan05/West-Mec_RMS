@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 #{ir}: #{incident.ir}
+
+  p #[strong Location:] #{incident.location}
+  p #[strong Location Name:] #{incident.location_name}
+  p #[strong Radio Code:] #{incident.radio_code}
+  p #[strong Officer:] #{incident.officer}
+  p #[strong Officer:] #{incident.officer_badge}
+  p #[strong Report Date:] #{incident.report_date}
+  p #[strong Report Time:] #{incident.report_time}
+  p #[strong Summary:] #{incident.narrative}
+
+  p #[strong Person:]
+    a(href=incident.person.url) #{incident.person.name}
+  
+    //-   p #[strong Vehicle:]
+    //-     each val, index in Incident.vehicle
+    //-       a(href=val.url) #{val.name}
+    //-       if index < Incident.vehicle.length - 1
+        
+
+    //- div(style='margin-left:20px;margin-top:20px')
+
+        //- else
+        //- p There are no incidents.
+
+    hr
+    //-   p
+    //-     a(href=book.url+'/delete') Delete Book
+  p
+    a(href=incident.url+'/update') Update Incident
