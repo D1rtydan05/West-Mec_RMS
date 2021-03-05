@@ -46,7 +46,6 @@ exports.incident_detail = function (req, res, next) {
                 .populate('vehicle')
                 .exec(callback);
         },
-
     }, function (err, results) {
         if (err) { return next(err); }
         if (results.incident == null) { // No results.

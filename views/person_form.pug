@@ -88,6 +88,9 @@ block content
         label(for='gang_affiliation') Gang Affiliation:
         input#gang_affiliation.form-control(type='text' placeholder='' name='gang_affiliation' required='true' value=(undefined===person ? '' : person.gang_affiliation))
 
+          //- label(for='person_image') Person Image:
+          //- input#person_image.form-control(type='image' placeholder='' name='person_image' required='true' value=(undefined===person ? '' : person.person_image))
+
         label(for='hazard') Hazard:
         input.checkbox-input(type='checkbox', name='hazard')
 

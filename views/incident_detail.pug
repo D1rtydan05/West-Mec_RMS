@@ -3,23 +3,31 @@ extends layout
 block content
   h1 #{ir}: #{incident.ir}
 
+  p #[strong Location:] #{incident.location}
+  p #[strong Location Name:] #{incident.location_name}
+  p #[strong Radio Code:] #{incident.radio_code}
+  p #[strong Officer:] #{incident.officer}
+  p #[strong Officer:] #{incident.officer_badge}
+  p #[strong Report Date:] #{incident.report_date}
+  p #[strong Report Time:] #{incident.report_time}
+  p #[strong Summary:] #{incident.narrative}
+
   p #[strong Person:]
-    a(href=Incident.Person.url) #{Incident.Person.name}
-  p #[strong Summary:] #{Incident.narrative}
-  p #[strong ISBN:] #{Incident.isbn}
-  p #[strong Genre:]
-    each val, index in book.genre
-      a(href=val.url) #{val.name}
-      if index < book.genre.length - 1
+    a(href=incident.person.url) #{incident.person.name}
+  
+    //-   p #[strong Vehicle:]
+    //-     each val, index in Incident.vehicle
+    //-       a(href=val.url) #{val.name}
+    //-       if index < Incident.vehicle.length - 1
         
 
     //- div(style='margin-left:20px;margin-top:20px')
 
-    else
-      p There are no incidents.
+        //- else
+        //- p There are no incidents.
 
     hr
+    //-   p
+    //-     a(href=book.url+'/delete') Delete Book
   p
-    a(href=book.url+'/delete') Delete Book
-  p
-    a(href=book.url+'/update') Update Book
+    a(href=incident.url+'/update') Update Incident

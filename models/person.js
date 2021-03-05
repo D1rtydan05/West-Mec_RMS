@@ -21,7 +21,8 @@ var PersonSchema = new Schema(
       address: {type: String, required: true, maxlength: 100},
       phone_number: {type: String, required: true, maxlength: 100},
       gang_affiliation: {type: String, required: false, maxlength: 100},
-      hazard: {type: Boolean, required: false}
+      hazard: {type: Boolean, required: false},
+        // person_image: {type: String, required: false}
     }
   );
 

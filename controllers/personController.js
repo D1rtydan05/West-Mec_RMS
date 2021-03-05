@@ -93,6 +93,7 @@ exports.person_create_post = [
                     phone_number: req.body.phone_number,
                     gang_affiliation: req.body.gang_affiliation,
                     hazard: req.body.hazard,
+                        // person_image: req.body.person_image
                 });
             person.save(function (err) {
                 if (err) { return next(err); }
@@ -169,7 +170,8 @@ exports.person_update_post = [
                 phone_number: req.body.phone_number,
                 gang_affiliation: req.body.gang_affiliation,
                 hazard: req.body.hazard,
-                _id: req.params.id
+                _id: req.params.id,
+                person_image: req.body.person_image
             });
 
         if (!errors.isEmpty()) {

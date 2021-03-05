@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 #{license_plate}: #{vehicle.license_plate}
+
+  
+  p #[strong Color:] #{vehicle.color}
+  p #[strong Year:] #{vehicle.year}
+  p #[strong Makes:] #{vehicle.makes}
+  p #[strong Model:] #{vehicle.model}
+  p #[strong Body Type:] #{vehicle.body_type}
+  p #[strong VIN:] #{vehicle.vin}
+  p #[strong Additional Details:] #{vehicle.additional_details}
+
+  p #[strong Person:]
+    a(href=vehicle.person.url) #{vehicle.person.name}
+  
+    //-   p #[strong Vehicle:]
+    //-     each val, index in Vehicle.vehicle
+    //-       a(href=val.url) #{val.name}
+    //-       if index < Vehicle.vehicle.length - 1
+        
+
+    //- div(style='margin-left:20px;margin-top:20px')
+
+        //- else
+        //- p There are no vehicles.
+
+    hr
+    //-   p
+    //-     a(href=book.url+'/delete') Delete Book
+  p
+    a(href=vehicle.url+'/update') Update Vehicle
