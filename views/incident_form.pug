@@ -47,6 +47,9 @@ block content
             option(value=person._id selected=(person._id.toString()===incident.person._id.toString() ? 'selected' : false) ) #{person.name}
           else
             option(value=person._id) #{person.name}
+        option(value="N/A",) N/A
+          //- selected=(undefined===person || person._id!='N/A' ? false:'selected')
+
     div.form-group
       label(for='narrative') Narrative:
       textarea#narrative.form-control(type='textarea', placeholder='Narrative' name='narrative' required='true') #{undefined===incident ? '' : incident.narrative}

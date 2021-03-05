@@ -5,7 +5,7 @@ block content
 
   form(method='POST' action='')
     div.form-group
-        label(for='license_plate') license plate:
+        label(for='license_plate') license plate / State:
         input#license_plate.form-control(type='text' placeholder='' name='license_plate' required='true' value=(undefined===vehicle ? '' : vehicle.license_plate))
 
         label(for='color') Color:
