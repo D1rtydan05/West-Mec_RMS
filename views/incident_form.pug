@@ -9,6 +9,12 @@ block content
       input#ir.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
       //- why title?
 
+      label(for='occurrence_date') Occurrence Date:
+      input#occurrence_date.form-control(type='date' placeholder='1234' name='occurrence_date' required='true' value=(undefined===incident ? '' : incident.occurrence_date)) 
+
+      label(for='occurrence_time') Occurrence Time:
+      input#occurrence_time.form-control(type='text' placeholder='1234' name='occurrence_time' required='true' value=(undefined===incident ? '' : incident.occurrence_time)) 
+
       label(for='location') Location:
       input#location.form-control(type='text' placeholder='1234 street st' name='location' required='true' value=(undefined===incident ? '' : incident.location)) 
 
