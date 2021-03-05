@@ -114,8 +114,8 @@ exports.incident_create_post = [
             report_time: req.body.report_time,
             narrative: req.body.narrative,
             person: req.body.person,
-            report_date: req.body.report_date,
-            report_time: req.body.report_time,
+            occurrence_date: req.body.occurrence_date,
+            occurrence_time: req.body.occurrence_time,
            });
 
         if (!errors.isEmpty()) {
@@ -236,8 +236,6 @@ exports.incident_update_post = [
               report_time: req.body.report_time,
               narrative: req.body.narrative,
               person: req.body.person,
-              report_date: req.body.report_date,
-              report_time: req.body.report_time,
               _id: req.params.id // This is required, or a new ID will be assigned!
             });
 
