@@ -29,7 +29,7 @@ block content
         input#social_security_number.form-control(type='number' placeholder='000-00-0000' name='social_security_number' required='true' value=(undefined===person ? '' : person.social_security_number))
 
         label(for='date_of_birth') Date of Birth:
-        input#date_of_birth.form-control(type='date' name='date_of_birth' required='true' value=(undefined===person ? '' : person.date_of_birth)) 
+        input#date_of_birth.form-control(type='date' name='date_of_birth' required='true' value=(undefined===person ? '' : person.date_of_birth_yyyy_mm_dd)) 
                                                                                                                                 //- may need to add the mm-dd-yyyy
         label(for='race') Race:
         Select#race.form-control(type='select' name='race' required='true' value=(undefined===person ? '' : person.race))

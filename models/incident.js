@@ -13,7 +13,9 @@ var IncidentSchema = new Schema(
       report_date: { type: Date },
       report_time: {type: String, required: true, maxlength: 20},
       narrative: {type: String, required: true},
-      person: { type: Schema.Types.ObjectId, ref: 'Person', required: false }
+      person: { type: Schema.Types.ObjectId, ref: 'Person', required: false },
+      report_date: { type: Date },
+      report_time: {type: String, required: true, maxlength: 100},
     }
   );
 
