@@ -6,7 +6,7 @@ block content
   ul
     each vehicle in vehicle_list
       li
-        a(href=vehicle.url) #{vehicle.license_plate}
+        a(href=vehicle.url) Plate: #{vehicle.license_plate} | VIN: #{vehicle.vin}
 
     else
       li There are no vehicles.

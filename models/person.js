@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const { DateTime } = require("luxon");  //for date handling
 
 var Schema = mongoose.Schema;
 
@@ -24,6 +25,14 @@ var PersonSchema = new Schema(
       hazard: {type: Boolean, required: false}
     }
   );
+
+  PersonSchema.virtual('lifespan').get(function () {
+    var lifetime_string = '';
+    if (this.date_of_birth) {
+        lifetime_string = DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
+        return lifetime_string;
+    }
+    });
 
     // Virtual for person "full" name.
     PersonSchema.virtual('name').get(function () {
