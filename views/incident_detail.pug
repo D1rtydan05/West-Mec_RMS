@@ -3,6 +3,10 @@ extends layout
 block content
   h1 #{ir}: #{incident.ir}
 
+  p #[strong Primary:] #{incident.primary}
+  p #[strong Supplementary:] #{incident.supplementary}
+  p #[strong Occurrence Date:] #{incident.occurrence_date}
+  p #[strong Occurrence Time:] #{incident.occurrence_time}
   p #[strong Location:] #{incident.location}
   p #[strong Location Name:] #{incident.location_name}
   p #[strong Radio Code:] #{incident.radio_code}

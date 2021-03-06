@@ -35,10 +35,6 @@ var PersonSchema = new Schema(
     }
     });
 
-  PersonSchema.virtual('date_of_birth_yyyy_mm_dd').get(function () {
-    return DateTime.fromJSDate(this.date_of_birth).toISODate(); //format 'YYYY-MM-DD'
-    });
-
     // Virtual for person "full" name.
     PersonSchema.virtual('name').get(function () {
       return this.last_name + ', ' + this.first_name + ' ' + this.middle_name;

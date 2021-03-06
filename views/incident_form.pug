@@ -7,14 +7,24 @@ block content
     div.form-group
       label(for='ir') Incident Report Number:
       input#ir.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
-      //- why title?
 
+      div.form-group
+      div
+      label(for='primary') Check if Primary:
+      input.checkbox-input(type='checkbox', name='primary')
+
+      div
+      label(for='supplementary') Check if Supplementary:
+      input.checkbox-input(type='checkbox', name='supplementary')
+
+      div
       label(for='occurrence_date') Occurrence Date:
       input#occurrence_date.form-control(type='date' placeholder='1234' name='occurrence_date' required='true' value=(undefined===incident ? '' : incident.occurrence_date)) 
 
       label(for='occurrence_time') Occurrence Time:
       input#occurrence_time.form-control(type='text' placeholder='1234' name='occurrence_time' required='true' value=(undefined===incident ? '' : incident.occurrence_time)) 
 
+      div
       label(for='location') Location:
       input#location.form-control(type='text' placeholder='1234 street st' name='location' required='true' value=(undefined===incident ? '' : incident.location)) 
 
@@ -58,13 +68,7 @@ block content
       //- label(for='hazard') Hazard:
       //- input.checkbox-input(type='checkbox', name='hazard')
       
-    div.form-group
-      label Vehicle:
-      div
-        for vehicle in vehicles
-          div(style='display: inline; padding-right:10px;')
-            input.checkbox-input(type='checkbox', name='vehicle', id=vehicle._id, value=vehicle._id, checked=vehicle.checked )
-            label(for=vehicle._id) #{vehicle.name}
+
 
     div.form-group
     button.btn.btn-primary(type='submit') Submit

@@ -16,6 +16,8 @@ var IncidentSchema = new Schema(
       person: { type: Schema.Types.ObjectId, ref: 'Person', required: false },
       occurrence_date: { type: Date },
       occurrence_time: {type: String, required: true, maxlength: 100},
+      primary: {type: Boolean, required: false},
+      supplementary: {type: Boolean, required: false}
     }
   );
 

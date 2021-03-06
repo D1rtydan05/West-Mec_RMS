@@ -93,8 +93,10 @@ exports.incident_create_post = [
 
     // Validate and sanitise fields.
     body('ir', 'Ir must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('person', 'Person must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('narrative', 'Narrative must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('primary').toBoolean(),
+    body('supplementary').toBoolean(),
+
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -116,6 +118,8 @@ exports.incident_create_post = [
             person: req.body.person,
             occurrence_date: req.body.occurrence_date,
             occurrence_time: req.body.occurrence_time,
+            primary: req.body.primary,
+            supplementary: req.body.supplementary,
            });
 
         if (!errors.isEmpty()) {
@@ -217,6 +221,8 @@ exports.incident_update_post = [
     body('ir', 'Ir must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('person', 'Person must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('narrative', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('primary').toBoolean(),
+    body('supplementary').toBoolean(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -236,6 +242,10 @@ exports.incident_update_post = [
               report_time: req.body.report_time,
               narrative: req.body.narrative,
               person: req.body.person,
+              occurrence_date: req.body.occurrence_date,
+              occurrence_time: req.body.occurrence_time,
+              primary: req.body.primary,
+              supplementary: req.body.supplementary,
               _id: req.params.id // This is required, or a new ID will be assigned!
             });
 
