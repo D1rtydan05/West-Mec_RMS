@@ -3,13 +3,13 @@ extends layout
 block content
   h1= title
 
-  form(method='POST' action='')
+  body
+    form(method='POST' action='')
     div.form-group
       label(for='ir') Incident Report Number:
-      input#ir.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir) )
+      input#ir.form-control(type='text', placeholder='I.R. #' name='ir' required='true' value=(undefined===incident ? '' : incident.ir), style="background-color: blue; border-style: outset; border-width: 3px;" )
 
       div.form-group
-      div
       label(for='primary') Check if Primary:
       input.checkbox-input(type='checkbox', name='primary')
 
