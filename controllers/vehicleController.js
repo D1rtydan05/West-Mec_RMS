@@ -25,6 +25,11 @@ exports.vehicle_detail = function(req, res, next) {
               .exec(callback);
         },
 
+        person: function(callback) {
+          Person.findById(req.params.id)
+            .exec(callback);
+        },
+
         vehicle_incidents: function(callback) {
             Incident.find({ 'vehicle': req.params.id })
               .exec(callback);
@@ -64,8 +69,17 @@ exports.vehicle_create_get = function(req, res, next) {
 // Handle Vehicle create on POST.
 exports.vehicle_create_post =  [
 
+  (req, res, next) => {
+  if (!(req.body.person instanceof Array)) {
+    if (typeof req.body.person === 'undefined')
+        req.body.person = [];
+    else
+        req.body.person = new Array(req.body.person);
+}
+next();
+},
     // Validate and santize the year field.
-    body('license_plate', 'Vehicle plate required').trim().isLength({ min: 1 }).escape(),
+    //body('VIN', 'VIN required').trim().isLength({ min: 1 }).escape(),
   
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -98,6 +112,7 @@ exports.vehicle_create_post =  [
         Vehicle.findOne({ 'name': req.body.name })
           .exec( function(err, found_vehicle) {
              if (err) { return next(err); }
+             console.log(found_vehicle);
   
              if (found_vehicle) {
                // Vehicle exists, redirect to its detail page.
@@ -148,7 +163,7 @@ exports.vehicle_update_get = function (req, res, next) {
 exports.vehicle_update_post = [
 
   // Validate and sanitze the name field.
-  body('license_plate', 'Vehicle plate required').trim().isLength({ min: 1 }).escape(),
+  //body('vin', 'VIN required').trim().isLength({ min: 1 }).escape(),
 
 
   // Process request after validation and sanitization.

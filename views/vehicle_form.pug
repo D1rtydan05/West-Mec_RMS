@@ -43,7 +43,7 @@ block content
         input#model.form-control(type='text' placeholder='' name='model' required='true' value=(undefined===vehicle ? '' : vehicle.model))
 
         label(for='body_type') Body Type:
-        Select#body_type.form-control(type='Select' placeholder='' name='body_type' required='true' value=(undefined===vehicle ? '' : vehicle.body_type))
+        select#body_type.form-control(type='Select' placeholder='' name='body_type' required='true' value=(undefined===vehicle ? '' : vehicle.body_type))
             option(value="2D", selected=(undefined===vehicle || vehicle.body_type!='2D' ? false:'selected')) 2D - Two Door
             option(value="4D", selected=(undefined===vehicle || vehicle.body_type!='4D' ? false:'selected')) 4D - Four Door
             option(value="PK", selected=(undefined===vehicle || vehicle.body_type!='PK' ? false:'selected')) PK - Pickup
@@ -53,26 +53,9 @@ block content
         label(for='vin') VIN:
         input#vin.form-control(type='text' placeholder='' name='vin' required='true' value=(undefined===vehicle ? '' : vehicle.vin))
 
-         //-label(for='person') Registered Owner:
-         //-input#person.form-control(type='text' placeholder='' name='person' required='true' value=(undefined===vehicle ? '' : vehicle.person))
-
-         //-label(for='person') Registered Owner:
-         //-select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
-             for person in persons
-                 if vehicle
-                     option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
-                 else
-                     option(value=person._id) #{person.name}
-        //- label(for='person') registered owner:
-        //-     select#person.form-control(type='select', placeholder='Select Owner' name='person' required='true' )
-        //-     for person in persons
-        //-         if vehicle
-        //-                 option(value=person._id selected=(person._id.toString()===vehicle.person._id.toString() ? 'selected' : false) ) #{person.name}
-        //-         else
-        //-                 option(value=person._id) #{person.name}
     div.form-group
         label(for='person') Registered Person :
-        select#person.form-control(type='select', placeholder='Select person' name='person' required='true' )
+        select#person.form-control(type='select', placeholder='Select person' name='person' required='false' )
             for person in persons
                 if incident
                     option(value=person._id selected=(person._id.toString()===incident.person._id.toString() ? 'selected' : false) ) #{person.name}

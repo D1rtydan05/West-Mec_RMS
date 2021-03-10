@@ -3,10 +3,10 @@ extends layout
 block content
 
     h1 Person: #{person.name}
-    p #{person.lifespan}
-  
+
     div(style='margin-left:20px;margin-top:20px')
 
+    p #[strong Date of Birth:] #{person.lifespan}
     p #[strong Alias:] #{person.aliases}
     p #[strong Code:] #{person.code}
     p #[strong Social Security Number:] #{person.social_security_number}
