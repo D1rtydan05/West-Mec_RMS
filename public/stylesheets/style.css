@@ -4,6 +4,19 @@
   padding: 0;
   list-style: none;
 }
+/* colors */
+/* 
+Xiketic
+  #0D0221
+Midnight Blue
+  #0F084B
+Dark Cornflower Blue
+  #26408B
+Light Blue
+  #A6CFD5
+Aero Blue
+  #C2E7D9
+*/
 
 /* Grids Styles */
 
@@ -25,19 +38,38 @@ div.col-1-4{width:25%}
 div.col-2-3{width:67%}
 div.col-3-4{width:74%}
 
-div{
+/* div{
   outline-width: 1px;
   outline-style: solid;
   outline-color: red;
   outline: 1px solid red; 
-}   
-
+}    */
+/* ============================================ */
 body{
-  background-color: rgb(30, 101, 255);
+  background-color: #0F084B;
 }
 input{
     /* Doesn't Work */
   color: rgb(153, 26, 26);
   border-style: outset;
   border-width: 3px;
+}
+div.col-sm-2{
+  background-color: #26408B;
+  
+}
+a{
+  color: #C2E7D9;
+}
+h1, label, p, li{
+  color: #A6CFD5;
+}
+h1{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+li{
+  list-style: none;
+  padding-right: 2.5em;
 }
