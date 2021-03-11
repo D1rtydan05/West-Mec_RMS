@@ -2,17 +2,17 @@ extends layout
 
 block content
 
-  h1= title
-  p Welcome to #[em RMSDatabase]
+  h1(style="color: #C2E7D9")= title
+  p(style="text-align: center;") Welcome to #[em RMSDatabase]
 
-  h1 Reports
+  h1(style="color: #C2E7D9") Reports
 
   if error
     p Error getting database.
   else
-    p The database has the following reports:
+    p(style="text-align: center;") The database has the following reports:
 
-    ul
+    ul(style="text-align: center;")
       li #[strong Incidents:] !{data.incident_count}
       li #[strong People:] !{data.person_count}
       li #[strong Vehicles:] !{data.vehicle_count}
