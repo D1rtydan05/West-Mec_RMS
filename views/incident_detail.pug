@@ -5,18 +5,18 @@ block content
 
   p #[strong Primary:] #{incident.primary}
   p #[strong Supplementary:] #{incident.supplementary}
-  p #[strong Occurrence Date:] #{incident.occurrence_date}
+  p #[strong Occurrence Date:] #{incident.occurrence_date_display}
   p #[strong Occurrence Time:] #{incident.occurrence_time}
   p #[strong Location:] #{incident.location}
   p #[strong Location Name:] #{incident.location_name}
   p #[strong Radio Code:] #{incident.radio_code}
   p #[strong Officer:] #{incident.officer}
   p #[strong Officer #:] #{incident.officer_badge}
-  p #[strong Report Date:] #{incident.report_date}
+  p #[strong Report Date:] #{incident.report_date_display}
   p #[strong Report Time:] #{incident.report_time}
   p #[strong Summary:] #{incident.narrative}
 
-  p #[strong Person:]
+  p #[strong Person: ]
     a(href=incident.person.url) #{incident.person.name}
   
     //-   p #[strong Vehicle:]

@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+const { DateTime } = require("luxon");  //for date handling
+
 
 var Schema = mongoose.Schema;
 
@@ -15,6 +17,14 @@ var VehicleSchema = new Schema(
       additional_details: {type: String, required: false},
     }
   );
+
+  VehicleSchema.virtual('year_display').get(function () {
+    var year_string = '';
+    if (this.year) {
+        year_string = DateTime.fromJSDate(this.year).toLocaleString(DateTime.DATE_MED);
+        return year_string;
+    }
+    });
 
     // Virtual for this author instance URL.
 VehicleSchema.virtual('url').get(function () {

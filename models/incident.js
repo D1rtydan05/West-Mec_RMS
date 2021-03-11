@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+const { DateTime } = require("luxon");  //for date handling
+
 
 var Schema = mongoose.Schema;
 
@@ -22,7 +24,22 @@ var IncidentSchema = new Schema(
   );
 
 
-  
+  IncidentSchema.virtual('report_date_display').get(function () {
+    var report_string = '';
+    if (this.report_date) {
+        report_string = DateTime.fromJSDate(this.report_date).toLocaleString(DateTime.DATE_MED);
+        return report_string;
+    }
+    });
+
+  IncidentSchema.virtual('occurrence_date_display').get(function () {
+    var occurrence_string = '';
+    if (this.occurrence_date) {
+        occurrence_string = DateTime.fromJSDate(this.occurrence_date).toLocaleString(DateTime.DATE_MED);
+        return occurrence_string;
+    }
+    });
+
   // Virtual for this author instance URL.
 IncidentSchema.virtual('url').get(function () {
   return '/data/incident/' + this._id;

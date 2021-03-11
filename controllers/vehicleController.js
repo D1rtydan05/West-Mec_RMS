@@ -109,16 +109,8 @@ next();
       else {
         // Data from form is valid.
         // Check if Vehicle with same name already exists.
-        Vehicle.findOne({ 'name': req.body.name })
-          .exec( function(err, found_vehicle) {
-             if (err) { return next(err); }
-             console.log(found_vehicle);
-  
-             if (found_vehicle) {
-               // Vehicle exists, redirect to its detail page.
-               res.redirect(found_vehicle.url);
-             }
-             else {
+        
+             
   
                vehicle.save(function (err) {
                  if (err) { return next(err); }
@@ -128,9 +120,9 @@ next();
   
              }
   
-           });
+           
       }
-    }
+    
   ];
 
 // Display vehicle delete form on GET.

@@ -32,9 +32,9 @@ div{
   outline: 1px solid red; 
 }   
 
-body{
-  background-color: rgb(30, 101, 255);
-}
+/* body{ */
+  /* background-color: rgb(30, 101, 255); */
+/* } */
 input{
     /* Doesn't Work */
   color: rgb(153, 26, 26);
