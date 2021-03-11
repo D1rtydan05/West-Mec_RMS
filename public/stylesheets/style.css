@@ -43,19 +43,13 @@ div.col-3-4{width:74%}
   outline-style: solid;
   outline-color: red;
   outline: 1px solid red; 
-<<<<<<< HEAD
-}   
 
-/* body{ */
-  /* background-color: rgb(30, 101, 255); */
-/* } */
 =======
 }    */
 /* ============================================ */
 body{
   background-color: #0F084B;
 }
->>>>>>> main
 input{
     /* Doesn't Work */
   color: rgb(153, 26, 26);
